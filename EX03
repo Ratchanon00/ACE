@@ -1,0 +1,139 @@
+.PROGRAM main()
+
+        PROMPT "Sensor1 = ? ", number1
+        PROMPT "Sensor2 = ? ", number2
+        PROMPT "Count = ? ", cnt
+
+        CALL por(number, number1, number2, cnt)
+
+.END
+
+.PROGRAM por(number, number1, number2, cnt)
+
+        FOR i = 1 TO cnt
+            CASE TRUE OF
+              VALUE number1+number2 == 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48:
+                TYPE " Sensor1 + Sensor2 = ", number, " = even"
+                CALL home()
+                CALL pick01()
+                CALL place01()
+              VALUE number1+number2 == 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49:
+                TYPE " Sensor1 + Sensor2 = ", number, " = odd"
+                CALL home()
+                CALL pick02()
+                CALL place02()
+              VALUE number1+number2 >= 50:
+                TYPE " Sensor1 + Sensor2 = ", number, " > 50"
+                CALL home()
+                CALL pick03()
+                CALL place03()
+            END
+            TYPE "count = ", i
+        END
+
+.END
+
+.PROGRAM home()
+
+        SPEED 90 ALWAYS
+        BREAK
+        JMOVE 0, -90, 180, 0, 90, 0
+        BREAK
+
+.END
+
+.PROGRAM pick01()
+
+        MOVES home
+        BREAK
+        MOVES prepick01
+        BREAK
+        MOVES pick01
+        BREAK
+        SIGNAL 1
+        MOVES prepick01
+        BREAK
+        MOVES home
+        BREAK
+
+.END
+
+.PROGRAM place01()
+
+        MOVES home
+        BREAK
+        MOVES preplace01
+        BREAK
+        MOVES place01
+        BREAK
+        SIGNAL -1
+        MOVES preplace01
+        BREAK
+        MOVES home
+        BREAK
+
+.END
+
+.PROGRAM pick02()
+
+        MOVES home
+        BREAK
+        MOVES prepick02
+        BREAK
+        MOVES pick02
+        BREAK
+        SIGNAL 2
+        MOVES prepick02
+        BREAK
+        MOVES home
+        BREAK
+
+.END
+
+.PROGRAM place02()
+
+        MOVES home
+        BREAK
+        MOVES preplace02
+        BREAK
+        MOVES place02
+        BREAK
+        SIGNAL -2
+        MOVES preplace02
+        BREAK
+        MOVES home
+        BREAK
+
+.END
+
+.PROGRAM pick03()
+
+        MOVES home
+        BREAK
+        MOVES prepick03
+        BREAK
+        MOVES pick03
+        BREAK
+        SIGNAL 3
+        MOVES prepick03
+        BREAK
+        MOVES home
+        BREAK
+
+.END
+
+.PROGRAM place03()
+
+        MOVES home
+        BREAK
+        MOVES preplace03
+        BREAK
+        MOVES place03
+        BREAK
+        SIGNAL -3
+        MOVES preplace03
+        BREAK
+        MOVES home
+        BREAK
+
+.END
