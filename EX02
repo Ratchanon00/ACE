@@ -1,0 +1,91 @@
+.PROGRAM ex02_6612247050()
+
+        SPEED 70 ALWAYS
+        SET home = TRANS(500,0,400,0,180,0)
+        SET pick01 = TRANS(500,-300,50,0,180,0)
+        SET prepick01 = SHIFT(pick01 BY 0,0,100)
+        SET pick02 = TRANS(450,-300,50,0,180,0)
+        SET prepick02 = SHIFT(pick02 BY 0,0,100)
+        SET pick03 = TRANS(400,-300,50,0,180,0)
+        SET prepick03 = SHIFT(pick03 BY 0,0,100)
+        SET place01 = TRANS(500,200,50,0,180,0)
+        SET preplace01 = SHIFT(place01 BY 0,0,150)
+        SET place02 = TRANS(450,200,50,0,180,0)
+        SET preplace02 = SHIFT(place02 BY 0,0,150)
+        SET place03 = TRANS(550,200,50,0,180,0)
+        SET preplace03 = SHIFT(place03 BY 0,0,150)
+
+        READY
+        BREAK
+        JMOVE 0, -90, 180, 0, 90, 0
+        BREAK
+        PROMPT "Loop Count ", loop_cnt
+        MOVES home
+        BREAK
+
+        FOR i = 1 TO loop_cnt
+            IF SIG(1004) THEN
+                MOVES prepick01
+                BREAK
+                MOVES pick01
+                BREAK
+                SIGNAL 2
+                MOVES prepick01
+                BREAK
+                MOVES home
+                BREAK
+                MOVES preplace01
+                BREAK
+                MOVES place01
+                BREAK
+                SIGNAL -2
+                MOVES preplace01
+                BREAK
+                MOVES home
+                BREAK
+            END
+            IF SIG(1005) THEN
+                MOVES prepick02
+                BREAK
+                MOVES pick02
+                BREAK
+                SIGNAL 3
+                MOVES prepick02
+                BREAK
+                MOVES home
+                BREAK
+                MOVES preplace02
+                BREAK
+                MOVES place02
+                BREAK
+                SIGNAL -3
+                MOVES preplace02
+                BREAK
+                MOVES home
+                BREAK
+            END
+            IF SIG(1006) THEN
+                MOVES prepick03
+                BREAK
+                MOVES pick03
+                BREAK
+                SIGNAL 4
+                MOVES prepick03
+                BREAK
+                MOVES home
+                BREAK
+                MOVES preplace03
+                BREAK
+                MOVES place03
+                BREAK
+                SIGNAL -4
+                MOVES preplace03
+                BREAK
+                MOVES home
+                BREAK
+            END
+        END
+        TYPE "=", i
+        MOVES home
+        BREAK
+.END
